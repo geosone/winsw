@@ -19,7 +19,7 @@ jobs:
       - name: Build unchanged Framework distribution with lifecycle fix
         shell: pwsh
         run: |
-          dotnet build src/WinSW/WinSW.csproj -c Release -f net461 -p:TargetFrameworks=net461 -p:Version=2.12.0.1 -p:FileVersion=2.12.0.1
+          dotnet build src/WinSW/WinSW.csproj -c Release -f net461 -p:TargetFrameworks=net461 -p:Version=2.12.0.1 -p:FileVersion=2.12.0.1 -p:PublishTrimmed=false
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item LICENSE.txt artifacts/publish/LICENSE.txt
           Copy-Item fork/README.md artifacts/publish/FORK-NOTES.md
