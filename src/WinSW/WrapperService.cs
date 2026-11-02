@@ -391,7 +391,9 @@ namespace WinSW
 
         private void SignalStopped()
         {
-            using var scm = ServiceManager.Open();
+            // A service-specific non-administrator identity only needs to connect
+            // to SCM here. ALL_ACCESS prevents reporting a clean child exit.
+            using var scm = ServiceManager.Open(ServiceApis.ServiceManagerAccess.Connect);
             using var sc = scm.OpenService(this.ServiceName, ServiceApis.ServiceAccess.QueryStatus);
 
             sc.SetStatus(this.ServiceHandle, ServiceControllerStatus.Stopped);

@@ -1,0 +1,31 @@
+name: Stable Framework service host
+on:
+  push:
+    branches: [fix/non-admin-clean-exit]
+    tags: ['v2.12.0.*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build unchanged Framework distribution with lifecycle fix
+        shell: pwsh
+        run: |
+          dotnet build src/WinSW/WinSW.csproj -c Release -f net461 -p:TargetFrameworks=net461 -p:Version=2.12.0.1 -p:FileVersion=2.12.0.1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Copy-Item LICENSE.txt artifacts/publish/LICENSE.txt
+          Copy-Item fork/README.md artifacts/publish/FORK-NOTES.md
+          Get-FileHash artifacts/publish/WinSW.NET461.exe -Algorithm SHA256 | Format-List | Out-File artifacts/publish/SHA256.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: winsw-framework
+          path: artifacts/publish/*
+          if-no-files-found: error
