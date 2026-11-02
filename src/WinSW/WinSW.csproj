@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net20;net40;net461;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net462;net6.0-windows</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -53,10 +53,10 @@
       <IdentifierSuffix>NET4</IdentifierSuffix>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
       <!-- v4.5+ -->
       <TargetPlatform>v4.5</TargetPlatform>
-      <IdentifierSuffix>NET461</IdentifierSuffix>
+      <IdentifierSuffix>NET462</IdentifierSuffix>
     </PropertyGroup>
 
     <PropertyGroup>

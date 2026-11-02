@@ -13,6 +13,11 @@ are broadened. Native integration tests live in geos_one/mysticd and cover
 Windows 10 x86/x64, MIS POP3, graceful SCM stop, clean child exit, and actual
 virtual-account positive/negative file access.
 
-The workflow builds the .NET Framework 4.6.1 standalone binary with the upstream
+The workflow builds the .NET Framework 4.6.2 standalone binary with the upstream
 ILMerge target. It retains dependency license notices. Installer pinning follows
 only after native tests pass; this fork does not imply upstream endorsement.
+
+The selected Framework target uses log4net 3.3.0 because NuGet audit rejects
+upstream 2.0.12 for GHSA-4f7c-pmjv-c25w (log-event loss with forbidden XML
+characters). 3.3.0 requires Framework 4.6.2; audit remains enabled and warnings
+remain errors. Legacy upstream targets are outside this fork's release build.

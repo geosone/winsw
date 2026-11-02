@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net20;net40;net461;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net462;net6.0-windows</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.12" />
+    <PackageReference Include="log4net" Version="3.3.0" Condition="'$(TargetFramework)' == 'net462'" />
+    <PackageReference Include="log4net" Version="2.0.12" Condition="'$(TargetFramework)' != 'net462'" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.*">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,7 +28,7 @@
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
 
