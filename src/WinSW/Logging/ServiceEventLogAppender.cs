@@ -37,8 +37,15 @@ namespace WinSW.Logging
             }
         }
 
-        private static EventLogEntryType ToEventLogEntryType(Level level)
+        private static EventLogEntryType ToEventLogEntryType(Level? level)
         {
+            // log4net 3 annotates Level as nullable. Preserve an event with no
+            // explicit level as informational rather than dropping the record.
+            if (level is null)
+            {
+                return EventLogEntryType.Information;
+            }
+
             if (level.Value >= Level.Error.Value)
             {
                 return EventLogEntryType.Error;
