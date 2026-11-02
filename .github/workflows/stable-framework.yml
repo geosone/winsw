@@ -22,6 +22,7 @@ jobs:
           dotnet build src/WinSW/WinSW.csproj -c Release -f net462 -p:TargetFrameworks=net462 -p:Version=2.12.0.1 -p:FileVersion=2.12.0.1 -p:PublishTrimmed=false
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item LICENSE.txt artifacts/publish/LICENSE.txt
+          Copy-Item fork/licenses/*.txt artifacts/publish/
           Copy-Item fork/README.md artifacts/publish/FORK-NOTES.md
           Get-FileHash artifacts/publish/WinSW.NET462.exe -Algorithm SHA256 | Format-List | Out-File artifacts/publish/SHA256.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

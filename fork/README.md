@@ -21,3 +21,9 @@ The selected Framework target uses log4net 3.3.0 because NuGet audit rejects
 upstream 2.0.12 for GHSA-4f7c-pmjv-c25w (log-event loss with forbidden XML
 characters). 3.3.0 requires Framework 4.6.2; audit remains enabled and warnings
 remain errors. Legacy upstream targets are outside this fork's release build.
+
+The release folder includes the original WinSW MIT license, log4net Apache
+license/notice (source commit 42a77cb05abfd5b1ad7224f0861a932eac95c7c8), and
+YamlDotNet v8.1.2 MIT notice. Only the net462 target is built for this installer.
+Native-tested CI output is promoted unchanged to the release; do not replace
+assets under an already pinned release tag.
